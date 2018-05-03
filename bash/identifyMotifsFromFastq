@@ -1,0 +1,17 @@
+##Identify overrepresented sequences from raw reads
+##Uses the following tools:
+##fastq-mcf from ea-utils (1.04.807, https://expressionanalysis.github.io/ea-utils/, available: 2017-09-12)
+##bioawk (https://github.com/lh3/bioawk, available: 2017-09-12)
+##homer2 (v4.8.3, http://homer.ucsd.edu/homer/, available: 2017-09-12)
+##Fasta file of adapters includes Illumina adapters as well as the following:
+##PolyA (A[30]) and the N2IndSeq primer (5'-AAGAGCGGTTCAGCAGGAATGCCGAG-3') used in GSE42250
+
+#Trim adapters from raw reads in FASTQ
+zcat FASTQ.GZ | fastq-mcf -S -x 0 -q 0 -k 0 -s 4.6 ADAPTERS.FASTA - -o CLIP.FASTQ
+#Convert FASTQ to FASTA (can also be done using `seqtk seq`)
+sed -n '1~4s/^@/>/p;2~4p' CLIP.FASTQ > FASTA
+#Subsample 1 million FASTA records (can also be done using `seqtk sample`)
+bioawk -c fastx -v k=1000000 '{y=x++<k?x-1:int(srand()*x);if(y<k)a[y]=">"$name"\n"$seq}END{for(z in a)print a[z]}' FASTA > SUB.FASTA
+#Run motif discovery
+homer2 denovo -len 12 -i DIP.SUB.FASTA -b INPUT.SUB.FASTA > MOTIF.TXT
+compareMotifs.pl MOTIF.TXT MOTIF_OUT
