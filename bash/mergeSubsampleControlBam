@@ -1,0 +1,20 @@
+##Pools and subsamples control reads from multiple studies to minimize experimental factors
+##These subsampled controls are used for identifying enriched regions between different studies
+##Uses samtools (v1.6, http://www.htslib.org/, available: 2017-09-12)
+##For identifying enriched regions, MACS2 (v2.1.1, https://github.com/taoliu/MACS, available: 2017-09-12)
+#Merge and index BAM files, see Supplementary Table 1 from manuscript for exact datasets used
+samtools merge IgG.bam IgG1.bam IgG2.bam IgG3.bam
+samtools index IgG.bam
+samtools merge Input.bam Input1.bam Input2.bam Input3.bam Input4.bam
+samtools index Input.bam
+##Subsample 20 million reads using samtools
+#Use the idxstats line to get the -s factor since this can't be piped
+#samtools idxstats BAM | awk '{m+=$3;u+=$4;sum=m+u;res=20000000/sum} END {print res}'
+#--> outputs X or Y for IgG or Input, respectively
+samtools view IgG.bam -s X -u | samtools sort - IgG_20
+samtools index IgG_20.bam
+samtools view Input.bam -s Y -u | samtools sort - Input_20
+samtools index Input_20bam
+#Subsampled controls are then used for identification of enriched regions
+macs2 callpeak -t BAM -c IgG_20.bam -n OUT -f BAM_vs_IgG -g mm --bw=200 -p 0.00005
+macs2 callpeak -t BAM -c Input_20.bam -n OUT -f BAM_vs_Input -g mm --bw=200 -p 0.00005
