@@ -1,0 +1,10 @@
+##Calculate bedgraph coverage as reads per millions mapped (RPM)
+##Uses the following tools:
+##BEDTools (v2.26.0, http://bedtools.readthedocs.io, available: 2017-09-12)
+##samtools (v1.6, http://www.htslib.org/, available: 2017-09-12)
+##fetchChromSizes from UCSC to get mm9.genome
+
+#calculate genomic coverage from sorted .bam file
+genomeCoverageBed -ibam SORTED.BAM -bg -split -g mm9.genome > BEDGRAPH
+#calculate mapped read count per million and normalize score column of bedgraph
+samtools idxstats SORTED.BAM | awk '{sum+=$3;rpm=sum/1000000} END {print rpm}' | awk '{getline var <"-";$4=$4*var;FS="\t";print $0}' BEDGRAPH > RPM_BEDGRAPH
