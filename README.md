@@ -1,5 +1,5 @@
 # A reassessment of DNA immunoprecipitation-based genomic profiling
-In this [paper] (https://doi.org/10.1101/224279) we show X.
+In this [paper](https://doi.org/10.1101/224279) we show X.
 
 Bash and R scripts related to publication, (R version 3.4.2 (2017-09-28) was used predominantly). 
 
