@@ -1,5 +1,5 @@
 # A reassessment of DNA immunoprecipitation-based genomic profiling
-In this [paper](https://doi.org/10.1101/224279) we show X.
+Available: paper ([preprint](https://doi.org/10.1101/224279)).
 
 Bash and R scripts related to publication. Scripts are rewritten to provide step-wise explanation of what was done to increase reproducibility and may require editing of variable names etc. to work properly on real files. Raw data pre-processing steps prior to analysis is provided in the manuscript and was kept to a minimum to simplify the usage of different pipelines, eg. different alignment software. All accession codes for datasets are provided in the manuscript.
 
