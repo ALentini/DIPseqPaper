@@ -1,10 +1,10 @@
 ## A reassessment of DNA immunoprecipitation-based genomic profiling
 ### Lentini A., Lagerwall C., Vikingsson S., Mjoseng H.K., Douvlataniotis K., Vogt H., Green H., Meehan R.R., Benson M. & Nestor C.E.
-Availability: paper (in press) ; ([preprint](https://doi.org/10.1101/224279)).
+Availability: [Nature Methods paper](https://doi.org/10.1038/s41592-018-0038-7) ; ([preprint](https://doi.org/10.1101/224279)).
 
-(More info to come)
+In this paper we show that all commonly used antibodies give rise to off-target effects during genome-wide DNA immunoprecipitation (DIP)-seq experiments making IgG controls critical for correct interpretation of the data.
 
-Data and scripts related to publication. Some scripts are rewritten to provide step-wise explanation of what was done to increase reproducibility and may require editing of variable names etc. to work properly on real files. Raw data pre-processing steps prior to analysis is provided in the manuscript and was kept to a minimum to simplify the usage of different pipelines, eg. different alignment software. All accession codes for datasets are provided in the manuscript.
+In this repository are data and scripts that were not already included in the publication. Some scripts are rewritten to provide step-wise explanation of what was done to increase reproducibility and may require editing of variable names etc. to work properly on real files. Raw data pre-processing steps prior to analysis are provided in the manuscript and was kept to a minimum to simplify the usage of different pipelines, eg. different alignment software. All accession codes for datasets are provided in the manuscript.
 
 ### Bash:
 - `bash/bedGraphRPM` was used to normalize counts in .bedGraph files from the same study as 'reads per million mapped' (RPM), eg. Figure 1a,b.
