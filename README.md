@@ -9,7 +9,7 @@ In this repository are data and scripts that were not already included in the pu
 ### Bash:
 - `bash/bedGraphRPM` was used to normalize counts in .bedGraph files from the same study as 'reads per million mapped' (RPM), eg. Figure 1a,b.
 - `bash/identifyMotifsFromFastq` was used to screen .fastq reads for overrepresented sequences, eg. Figure 1f & 2d. This was done to get an idea of immunoprecipitated sequences and avoid issues related to sequence alignment, ie. multimapping and poorly mapped genome regions.
-- `bash/mergeSubsampleControlBam` was used to pool and subsample IgG and Input control .bam files to 20M read universal background for use in peak calling. Resulting .narrowPeak files after peak calling are provided under `data/peaks` and the subsampled .bam files can be provided upon request due to large file size.
+- `bash/mergeSubsampleControlBam` was used to pool and subsample IgG and Input control .bam files to provide a 20M read universal background for use in peak calling. Resulting .narrowPeak files after peak calling are provided under `data/peaks` and the subsampled .bam files can be provided upon request due to large file size.
 
 ### R (version 3.4.2 (2017-09-28) was used predominantly):
 For reading files into R, the following functions were used:
